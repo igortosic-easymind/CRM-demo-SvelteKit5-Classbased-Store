@@ -1,6 +1,6 @@
-# ERP Frontend — SvelteKit 5
+# CRM/ERP Frontend — SvelteKit 5
 
-A modern ERP system built with SvelteKit 5 and Svelte 5 runes. Features client management, task tracking, calendar scheduling, and a dashboard — all powered by class-based reactive stores with zero external state management libraries.
+A modern CRM/ERP system built with SvelteKit 5 and Svelte 5 runes. Features client management, task tracking, calendar scheduling, and a dashboard — all powered by class-based reactive stores with zero external state management libraries.
 
 ## Features
 
@@ -34,7 +34,7 @@ Detailed documentation is in the [docs/](docs/) directory:
 
 ## Demo Access
 
-This is a **demo repository**. The app requires a test user account to log in.
+This is a **demo repository** - https://demo-easymindstudio.vercel.app/. The app requires a test user account to log in.
 
 To request demo credentials, contact: **info@easymindstudio.com**
 
