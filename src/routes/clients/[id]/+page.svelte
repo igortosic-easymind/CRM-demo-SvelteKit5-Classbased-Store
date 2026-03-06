@@ -2,11 +2,11 @@
   import { Button } from "$lib/components/ui/button/index.js";
   import ClientDetails from "$lib/components/clients/client-details.svelte";
   import ClientTasks from "$lib/components/clients/client-tasks.svelte";
-  import type { PageData } from "./$types";
+  import type { PageProps } from "./$types";
   import { userStore } from "$lib/store/user.svelte";
 
   // Get the data from the server load function
-  let { data } = $props<{ data: PageData }>();
+  let { data }: PageProps = $props();
 
   const currentUser = $derived(userStore.user);
 </script>

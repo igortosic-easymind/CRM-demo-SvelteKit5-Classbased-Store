@@ -6,10 +6,10 @@
   import type { Task } from "$lib/types";
 
   // Props
-  const { task, disabled = false } = $props<{
+  const { task, disabled = false }: {
     task: Task;
     disabled?: boolean;
-  }>();
+  } = $props();
 
   // Local state
   let open = $state(false);

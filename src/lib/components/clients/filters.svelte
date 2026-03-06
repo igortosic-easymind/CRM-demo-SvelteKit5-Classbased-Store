@@ -4,11 +4,10 @@
   import { goto } from "$app/navigation";
   import type { LeadStatus } from "$lib/types";
   
-  const { activeFilter = "all" } = $props<{ activeFilter?: LeadStatus | "all" }>();
+  const { activeFilter = "all" }: { activeFilter?: LeadStatus | "all" } = $props();
   
   // Access store directly with $derived
   const isLoading = $derived(clientStore.loading);
-  const storeFilters = $derived(clientStore.filters);
   
   const filterOptions: { value: LeadStatus | "all"; label: string; color: string }[] = [
     { value: "all", label: "All Leads", color: "bg-gray-100" },
@@ -43,7 +42,7 @@
 </script>
 
 <div class="flex items-center gap-2">
-  {#each filterOptions as filter}
+  {#each filterOptions as filter (filter.value)}
     <Button 
       variant={activeFilter === filter.value ? "default" : "outline"}
       size="sm"

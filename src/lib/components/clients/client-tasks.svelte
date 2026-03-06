@@ -4,7 +4,6 @@
   import { Badge } from "$lib/components/ui/badge/index.js";
   import { Button } from "$lib/components/ui/button/index.js";
   import { taskStore } from "$lib/store/tasks.svelte";
-  import { userStore } from "$lib/store/user.svelte";
   import type { Task } from "$lib/types";
   import Plus from "@lucide/svelte/icons/plus";
   import Eye from "@lucide/svelte/icons/eye";
@@ -12,7 +11,7 @@
   import CalendarDays from "@lucide/svelte/icons/calendar-days";
 
   // Props
-  const { clientId, tasks: propTasks = [] } = $props<{ clientId: number; tasks?: Task[] }>();
+  const { clientId, tasks: propTasks = [] }: { clientId: number; tasks?: Task[] } = $props();
 
   // Use tasks from props if available, otherwise filter from store
   const clientTasks = $derived(
@@ -81,7 +80,7 @@
       </div>
     {:else}
       <div class="space-y-3">
-        {#each clientTasks as task}
+        {#each clientTasks as task (task.id)}
           <div class="flex flex-col gap-2 rounded-md border p-3 hover:bg-muted/50">
             <div class="flex items-start justify-between gap-2">
               <div class="flex-1 min-w-0">

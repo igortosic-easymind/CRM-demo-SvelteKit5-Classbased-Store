@@ -2,9 +2,10 @@
   import * as Sidebar from "$lib/components/ui/sidebar/index.js";
   import AppSidebar from "$lib/components/app-sidebar.svelte";
   import { Button } from "$lib/components/ui/button/index.js";
+  import type { Snippet } from "svelte";
   import type { User } from "$lib/types";
 
-  let { user, children } = $props<{ user: User; children: any }>();
+  let { user, children }: { user: User; children: Snippet } = $props();
 </script>
 
 <div class="min-h-screen bg-background">

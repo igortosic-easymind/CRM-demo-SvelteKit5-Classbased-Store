@@ -5,11 +5,11 @@
   import type { ContactCreate } from "$lib/types";
 
   // Props
-  const { contact, clientId, disabled = false } = $props<{
+  const { contact, clientId, disabled = false }: {
     contact: ContactCreate & { id?: number };
     clientId: number;
     disabled?: boolean;
-  }>();
+  } = $props();
 
   // Local state
   let open = $state(false);

@@ -15,11 +15,11 @@
     client = undefined,
     form = {},
     isSubmitting = false,
-  } = $props<{
+  }: {
     client?: Client;
-    form?: any;
+    form?: { success?: boolean; error?: string } | null;
     isSubmitting?: boolean;
-  }>();
+  } = $props();
 
   const isEditMode = $derived(!!client);
   const formTitle = $derived(isEditMode ? "Edit Client" : "Add New Client");
@@ -32,7 +32,7 @@
   $effect(() => {
     if (client?.contacts && client.contacts.length > 0) {
       // Use existing contacts - preserve IDs for updates
-      contacts = client.contacts.map((contact: any) => ({
+      contacts = client.contacts.map((contact: ContactCreate) => ({
         id: contact.id, // Preserve ID for updates
         first_name: contact.first_name,
         last_name: contact.last_name,
@@ -170,7 +170,7 @@
         </div>
 
         <div class="space-y-6">
-          {#each contacts as contact, index}
+          {#each contacts as contact, index (contact.id || index)}
             <div class="rounded-md border p-4">
               <div class="mb-4 flex items-center justify-between">
                 <h4 class="text-sm font-medium">Contact {index + 1}</h4>

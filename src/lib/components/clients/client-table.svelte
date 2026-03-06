@@ -10,7 +10,7 @@
   const currentUser = $derived(userStore. user);
 
   // Proper Svelte 5 props syntax
-  const { clients = [] } = $props<{ clients?: Client[] }>();
+  const { clients = [] }: { clients?: Client[] } = $props();
 
   // Access loading state from store with $derived
   const isLoading = $derived(clientStore.loading);
@@ -80,7 +80,7 @@
       </tr>
     </thead>
     <tbody>
-      {#each clients as client}
+      {#each clients as client (client.id)}
         {@const primaryContact = getPrimaryContact(client)}
         <tr class="border-b bg-card hover:bg-muted/20">
           <td class="px-4 py-3 font-medium">{client.company_name || "—"}</td>
@@ -130,7 +130,7 @@
       <div class="text-sm">Loading clients...</div>
     </div>
   {/if}
-  {#each clients as client}
+  {#each clients as client (client.id)}
     {@const primaryContact = getPrimaryContact(client)}
     <div class="flex flex-col gap-2 rounded-md border bg-card p-4 shadow-sm">
       <div class="flex items-center justify-between gap-2">

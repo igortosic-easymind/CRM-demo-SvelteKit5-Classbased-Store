@@ -15,12 +15,12 @@
       editable = false,
       onEdit,
       onDelete
-    } = $props<{
+    }: {
       contacts: ContactResponse[];
       editable?: boolean;
       onEdit?: (contact: ContactResponse) => void;
       onDelete?: (contact: ContactResponse) => void;
-    }>();
+    } = $props();
   </script>
   
   {#if contacts.length === 0}

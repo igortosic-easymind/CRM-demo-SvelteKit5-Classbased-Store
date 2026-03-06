@@ -5,9 +5,9 @@
   import ClientDistribution from '$lib/components/dashboard/client-distribution.svelte';
   import ClientGrowth from '$lib/components/dashboard/client-growth.svelte';
   import { Users, UserPlus, Phone, Calendar, CheckSquare } from '@lucide/svelte';
-  import type { PageData } from './$types';
+  import type { PageProps } from './$types';
 
-  let { data } = $props<{data: PageData}>();
+  let { data }: PageProps = $props();
 </script>
 
 <div class="space-y-6">

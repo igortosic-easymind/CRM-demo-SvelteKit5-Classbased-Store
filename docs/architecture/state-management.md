@@ -204,8 +204,8 @@ When users interact (filter, search, paginate), the cycle repeats:
 ```svelte
 <!-- Dashboard: props, no store -->
 <script lang="ts">
-  import type { PageData } from "./$types";
-  let { data } = $props<{ data: PageData }>();
+  import type { PageProps } from "./$types";
+  let { data }: PageProps = $props();
 </script>
 
 <StatsCard title="Total Clients" value={data.statistics.totalClients} />
@@ -298,7 +298,9 @@ export const load: LayoutServerLoad = async ({ cookies }) => {
 <!-- src/routes/+layout.svelte -->
 <script lang="ts">
   import { userStore } from "$lib/store/user.svelte";
-  let { data, children } = $props<{ data: LayoutData; children: any }>();
+  import type { LayoutProps } from "./$types";
+
+  let { data, children }: LayoutProps = $props();
 
   $effect(() => {
     if (data.user) {

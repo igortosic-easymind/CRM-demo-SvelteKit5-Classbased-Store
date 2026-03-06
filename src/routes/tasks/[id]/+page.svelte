@@ -2,13 +2,13 @@
 <script lang="ts">
   import { Button } from "$lib/components/ui/button/index.js";
   import TaskDetails from "$lib/components/tasks/task-details.svelte";
-  import type { PageData } from "./$types";
+  import type { PageProps } from "./$types";
   import { userStore } from "$lib/store/user.svelte";
 
   const currentUser = $derived(userStore.user);
 
   // Get the data from the server load function
-  let { data } = $props<{ data: PageData }>();
+   let { data }: PageProps = $props();
 </script>
 
 <div class="space-y-6">

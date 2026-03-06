@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { BarChart3, UserCircle, Calendar, Settings as SettingsIcon, CheckSquare, HelpCircle } from "@lucide/svelte";
+  import { BarChart3, UserCircle, Calendar, Settings as SettingsIcon, CheckSquare } from "@lucide/svelte";
   import * as Sidebar from "$lib/components/ui/sidebar/index.js";
   import { useSidebar } from "$lib/components/ui/sidebar/index.js";
 

@@ -1,13 +1,10 @@
 <!-- src/routes/tasks/[id]/edit/+page.svelte -->
 <script lang="ts">
     import TaskForm from "$lib/components/tasks/task-form.svelte";
-    import type { PageData } from "./$types";
-    
+    import type { PageProps } from "./$types";
+
     // Get the data from the server load function
-    let { data, form = {} } = $props<{
-      data: PageData;
-      form?: { success?: boolean; error?: string };
-    }>();
+    let { data, form }: PageProps = $props();
   </script>
   
   <div class="space-y-6">

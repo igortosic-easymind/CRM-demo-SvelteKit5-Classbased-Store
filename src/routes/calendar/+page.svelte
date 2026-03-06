@@ -12,10 +12,9 @@
   import CombinedSidebar from "$lib/components/calendar/CombinedSidebar.svelte";
   import EventModal from "$lib/components/calendar/EventModal.svelte";
   import DeleteEventModal from "$lib/components/calendar/DeleteEventModal.svelte";
-  import type { CalendarEvent, CalendarViewItem as CalendarViewItemType, Task } from "$lib/types";
+  import type { CalendarEvent, CalendarViewItem as CalendarViewItemType } from "$lib/types";
   import { calendarStore } from "$lib/store/calendar.svelte";
   import { taskStore } from "$lib/store/tasks.svelte";
-  import { clientStore } from "$lib/store/clients.svelte";
 
   // Initialize view and date from URL parameters or defaults
   let selectedDate = $state<CalendarDate>(today(getLocalTimeZone()));
@@ -56,7 +55,6 @@
   let events = $derived(calendarStore.calendarEvents);
   let allTasks = $derived(taskStore.tasks);
   let calendarItems = $derived(calendarStore.calendarEvents || []);
-  let clients = $derived(clientStore.clients || []);
 
   // Convert tasks to CalendarViewItem format for unified display
   let convertedTasks = $derived(allTasks.map(task => ({
@@ -88,7 +86,7 @@
     return `${date.year}-${String(date.month).padStart(2, '0')}-${String(date.day).padStart(2, '0')}`;
   }
 
-  function updateURL(view?: "month" | "week", date?: CalendarDate, filters?: any) {
+  function updateURL(view?: "month" | "week", date?: CalendarDate, filters?: Record<string, string | number | boolean | null>) {
     if (!initialized) return; // Don't update URL during initialization
     
     const url = new URL(page.url);
@@ -116,13 +114,13 @@
     goto(url.toString(), { replaceState: true, invalidateAll: true });
   }
 
-  function handleDateSelect(detail: { date: any; events: CalendarEvent[] }) {
+  function handleDateSelect(detail: { date: CalendarDate; events: CalendarEvent[] }) {
     selectedDate = detail.date;
     calendarStore.setCurrentCalendarDate(formatDateForURL(selectedDate));
     updateURL(undefined, selectedDate);
   }
 
-  function handleWeekChange(date: any) {
+  function handleWeekChange(date: CalendarDate) {
     selectedDate = date;
     calendarStore.setCurrentCalendarDate(formatDateForURL(selectedDate));
     updateURL(undefined, selectedDate);
@@ -133,27 +131,8 @@
     updateURL(newView, selectedDate);
   }
 
-  function handleFilterChange(detail: any) {
-    filterState = { ...detail };
-    updateURL(undefined, undefined, filterState);
-  }
-
-  function handleFilterReset() {
-    filterState = {
-      search: "",
-      type: null,
-      status: null,
-      client_id: null,
-      start_date: null,
-      end_date: null,
-      include_tasks: true,
-      include_events: true,
-    };
-    updateURL(undefined, undefined, filterState);
-  }
-
   // Helper function to apply client-side filtering (for traditional calendar view)
-  function applyClientSideFilters(items: any[]): any[] {
+  function applyClientSideFilters<T extends CalendarEvent | CalendarViewItemType>(items: T[]): T[] {
     return items.filter(item => {
       // Check visibility settings
       if (item.item_type === "event" && !filterState.include_events) return false;
@@ -198,15 +177,13 @@
       } else {
         // Show events for the current week
         const eventDate = new Date(event.start_date);
-        const weekStart = selectedDate.toDate(getLocalTimeZone());
-        const dayOfWeek = weekStart.getDay();
+        const baseDate = selectedDate.toDate(getLocalTimeZone());
+        const dayOfWeek = baseDate.getDay();
         const mondayOffset = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
-        weekStart.setDate(weekStart.getDate() + mondayOffset);
-        
-        const weekEnd = new Date(weekStart);
-        weekEnd.setDate(weekStart.getDate() + 6);
-        
-        return eventDate >= weekStart && eventDate <= weekEnd;
+        const weekStartMs = baseDate.getTime() + mondayOffset * 86400000;
+        const weekEndMs = weekStartMs + 6 * 86400000;
+
+        return eventDate.getTime() >= weekStartMs && eventDate.getTime() <= weekEndMs;
       }
     });
     
@@ -216,53 +193,6 @@
 
   // Filter calendar items for combined view
   let filteredCalendarItems = $derived(applyClientSideFilters(allCalendarItems));
-
-  // Filter tasks for traditional calendar view (date-based)
-  let filteredTasksForCalendar = $derived(initialized && selectedDate ? (() => {
-    // Apply date filtering to tasks
-    const dateFilteredTasks = allTasks.filter(task => {
-      const taskDate = new Date(task.due_date || task.created_at);
-      
-      if (calendarStore.calendarView === "month") {
-        return taskDate.getMonth() === selectedDate.month - 1 && 
-               taskDate.getFullYear() === selectedDate.year;
-      } else {
-        const weekStart = selectedDate.toDate(getLocalTimeZone());
-        const dayOfWeek = weekStart.getDay();
-        const mondayOffset = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
-        weekStart.setDate(weekStart.getDate() + mondayOffset);
-        
-        const weekEnd = new Date(weekStart);
-        weekEnd.setDate(weekStart.getDate() + 6);
-        
-        return taskDate >= weekStart && taskDate <= weekEnd;
-      }
-    });
-    
-    // Apply user filters
-    return applyClientSideFilters(dateFilteredTasks.map(task => ({
-      id: task.id,
-      title: task.title,
-      description: task.description || "",
-      start_date: task.due_date || task.created_at,
-      end_date: task.due_date || task.created_at,
-      all_day: false,
-      type: task.type || "other",
-      status: task.status,
-      client_id: task.client_id || 0,
-      task_id: task.id,
-      location: "",
-      recurrence: "none",
-      recurrence_end: "",
-      created_at: task.created_at,
-      updated_at: task.updated_at,
-      item_type: "task",
-      priority: task.priority || "",
-      due_date: task.due_date || "",
-      completed_at: task.completed_at || ""
-    })));
-  })() : []);
-
 </script>
 
 {#if initialized}
@@ -299,7 +229,7 @@
     <div class="space-y-4">
       <h2 class="text-xl font-semibold">Events & Tasks</h2>
       <div class="space-y-3">
-        {#each filteredCalendarItems as item}
+        {#each filteredCalendarItems as item (item.id)}
           <CalendarViewItem 
             {item}
           />

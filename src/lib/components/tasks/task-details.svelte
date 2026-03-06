@@ -10,11 +10,11 @@
   import DeleteTaskDialog from "./delete-task-dialog.svelte";
 
   // Props
-  const { task, client = null } = $props<{ task: Task; client?: Client | null }>();
+  const { task, client = null }: { task: Task; client?: Client | null } = $props();
 
   // Get client name - use client prop if available, otherwise fallback
   const clientName = $derived(
-    client?.company_name || client?.first_name + " " + client?.last_name || 
+    client?.company_name ||
     (task.client_id ? `Client #${task.client_id}` : null)
   );
 
@@ -29,8 +29,8 @@
         month: "long",
         day: "numeric",
       });
-    } catch (e) {
-      return "Invalid date";
+    } catch (error) {
+      return `Invalid date ${error}`; // Handle invalid date formats gracefully
     }
   }
 
@@ -47,8 +47,8 @@
         hour: "2-digit",
         minute: "2-digit",
       });
-    } catch (e) {
-      return "Invalid date";
+    } catch (error) {
+      return `Invalid date ${error}`; // Handle invalid date formats gracefully
     }
   }
 

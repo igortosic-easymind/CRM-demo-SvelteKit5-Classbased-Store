@@ -8,10 +8,10 @@
   const currentUser = $derived(userStore.user);
 
   // Props
-  const { client, disabled = false } = $props<{
+  const { client, disabled = false }: {
     client: Client;
     disabled?: boolean;
-  }>();
+  } = $props();
 
   // Local state
   let open = $state(false);
@@ -38,7 +38,7 @@
       <Dialog.Header>
         <Dialog.Title>Delete Client</Dialog.Title>
         <Dialog.Description>
-          Are you sure you want to delete {client.company_name || `${client.first_name} ${client.last_name}`}? This
+          Are you sure you want to delete {client.company_name}? This
           action cannot be undone.
         </Dialog.Description>
       </Dialog.Header>

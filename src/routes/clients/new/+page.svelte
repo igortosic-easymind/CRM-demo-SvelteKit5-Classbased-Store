@@ -2,7 +2,7 @@
   import ClientForm from "$lib/components/clients/client-form.svelte";
   
   // Form data will be passed if there's an error after submission
-  let { form = {} } = $props<{ form?: { success?: boolean; error?: string } }>();
+  let { form = {} }: { form?: { success?: boolean; error?: string } | null } = $props();
 </script>
 
 <div class="space-y-6">

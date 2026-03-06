@@ -5,8 +5,8 @@
 	import { Label } from "$lib/components/ui/label/index.js";
 	import { enhance } from "$app/forms";
 	
-	export let form: { success?: boolean; error?: string } = {};
-	let isLoading = false;
+	let { form = undefined }: { form?: { success?: boolean; error?: string } | null } = $props();
+	let isLoading = $state(false);
 	
 	function handleSubmit() {
 		isLoading = true;

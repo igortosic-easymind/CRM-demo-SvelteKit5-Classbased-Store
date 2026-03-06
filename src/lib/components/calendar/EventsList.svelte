@@ -7,14 +7,13 @@
   import { calendarStore } from "$lib/store/calendar.svelte";
   import type { CalendarEvent, CalendarEventType } from "$lib/types";
 
-  export let events: CalendarEvent[] = [];
-  export let title = "Events";
+  let { events = [], title = "Events" }: { events?: CalendarEvent[]; title?: string } = $props();
 
-  let searchTerm = "";
-  let filterType: CalendarEventType | "all" = "all";
+  let searchTerm = $state("");
+  let filterType = $state<CalendarEventType | "all">("all");
 
   // Filter events based on search and type
-  $: filteredEvents = events.filter(event => {
+  const filteredEvents = $derived(events.filter(event => {
     const matchesSearch = !searchTerm || 
       event.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       (event.description && event.description.toLowerCase().includes(searchTerm.toLowerCase()));
@@ -22,7 +21,7 @@
     const matchesType = filterType === "all" || event.type === filterType;
     
     return matchesSearch && matchesType;
-  });
+  }));
 
   function handleEventView(event: CalendarEvent) {
     calendarStore.viewEvent(event);
@@ -130,7 +129,7 @@
         {searchTerm || filterType !== "all" ? "No events match your filters" : "No events found"}
       </div>
     {:else}
-      {#each filteredEvents as event}
+      {#each filteredEvents as event (event.id)}
         <div class="w-full p-3 rounded-lg border hover:bg-gray-50 transition-colors">
           <div class="flex items-start space-x-3">
             <!-- Event Type Indicator -->

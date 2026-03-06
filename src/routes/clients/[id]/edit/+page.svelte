@@ -1,13 +1,10 @@
 <!-- src/routes/clients/[id]/edit/+page.svelte -->
 <script lang="ts">
   import ClientForm from "$lib/components/clients/client-form.svelte";
-  import type { PageData } from "./$types";
+  import type { PageProps } from "./$types";
   
   // Get the data from the server load function
-  let { data, form = {} } = $props<{
-    data: PageData;
-    form?: { success?: boolean; error?: string };
-  }>();
+  let { data, form }: PageProps = $props();
 </script>
 
 <div class="space-y-6">

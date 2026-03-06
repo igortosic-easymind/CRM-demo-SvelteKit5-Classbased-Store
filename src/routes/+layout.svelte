@@ -2,9 +2,9 @@
   import "../app.css";
   import ProtectedLayout from "$lib/components/layouts/protected-layout.svelte";
   import { userStore } from "$lib/store/user.svelte";
-  import type { LayoutData } from "./$types";
+  import type { LayoutProps } from "./$types";
 
-  let { data, children } = $props<{ data: LayoutData; children: any }>();
+  let { data, children }: LayoutProps = $props();
 
   // Initialize user store with data from server
   $effect(() => {

@@ -12,7 +12,7 @@
   import { userStore } from "$lib/store/user.svelte";
 
   // Props
-  const { client } = $props<{ client: Client }>();
+  const { client }: { client: Client } = $props();
 
   const currentUser = $derived(userStore.user);
 
@@ -27,8 +27,8 @@
         month: "long",
         day: "numeric",
       });
-    } catch (e) {
-      return "Invalid date";
+    } catch (error) {
+      return `Invalid date ${error}`; // Handle invalid date formats gracefully
     }
   }
 
@@ -50,7 +50,7 @@
 <Card.Root class="max-w-4xl">
   <Card.Header class="flex flex-row items-center justify-between">
     <div>
-      <Card.Title class="text-2xl">{client.company_name || `${client.first_name} ${client.last_name}`}</Card.Title>
+      <Card.Title class="text-2xl">{client.company_name}</Card.Title>
       <Card.Description>
         Client information and details
       </Card.Description>

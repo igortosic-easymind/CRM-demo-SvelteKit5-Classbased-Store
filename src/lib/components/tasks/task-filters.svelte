@@ -4,11 +4,10 @@
   import { goto } from "$app/navigation";
   import type { TaskStatus } from "$lib/types";
   
-  const { activeFilter = "all" } = $props<{ activeFilter?: TaskStatus | "all" }>();
+  const { activeFilter = "all" }: { activeFilter?: TaskStatus | "all" } = $props();
   
   // Access store directly with $derived
   const isLoading = $derived(taskStore.loading);
-  const storeFilters = $derived(taskStore.filters);
   
   const filterOptions: { value: TaskStatus | "all"; label: string; color: string }[] = [
     { value: "all", label: "All Tasks", color: "bg-gray-100" },
@@ -40,7 +39,7 @@
 </script>
 
 <div class="flex flex-wrap gap-2 w-full">
-  {#each filterOptions as filter}
+  {#each filterOptions as filter (filter.value)}
     <Button 
       variant={activeFilter === filter.value ? "default" : "outline"}
       size="sm"
