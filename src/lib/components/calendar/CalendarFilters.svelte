@@ -226,7 +226,7 @@
               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="">All types</option>
-              {#each eventTypes as eventType}
+              {#each eventTypes as eventType (eventType.value)}
                 <option value={eventType.value}>{eventType.label}</option>
               {/each}
             </select>
@@ -242,7 +242,7 @@
               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="">All statuses</option>
-              {#each statusOptions as statusOption}
+              {#each statusOptions as statusOption (statusOption.value)}
                 <option value={statusOption.value}>{statusOption.label}</option>
               {/each}
             </select>
@@ -280,7 +280,7 @@
             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="">All clients</option>
-            {#each clients as client}
+            {#each clients as client (client.id)}
               <option value={client.id}>
                 {getClientDisplayName(client)}
               </option>

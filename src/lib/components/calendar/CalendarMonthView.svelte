@@ -11,13 +11,12 @@
   interface Props {
     events?: CalendarEvent[];
     selectedDate?: CalendarDate;
-    onDateSelect?: (detail: { date: CalendarDate; events: CalendarEvent[] }) => void;
+    // onDateSelect?: (detail: { date: CalendarDate; events: CalendarEvent[] }) => void;
   }
 
   let {
     events = [],
     selectedDate = $bindable(today(getLocalTimeZone())),
-    onDateSelect
   }: Props = $props();
 
   // Group events by date for easy lookup
@@ -108,7 +107,7 @@
     
     {#if eventsByDate[`${selectedDate.year}-${String(selectedDate.month).padStart(2, '0')}-${String(selectedDate.day).padStart(2, '0')}`]}
       <div class="space-y-2">
-        {#each eventsByDate[`${selectedDate.year}-${String(selectedDate.month).padStart(2, '0')}-${String(selectedDate.day).padStart(2, '0')}`] as event}
+        {#each eventsByDate[`${selectedDate.year}-${String(selectedDate.month).padStart(2, '0')}-${String(selectedDate.day).padStart(2, '0')}`] as event (event.id)}
           <div class="w-full p-2 rounded border hover:bg-gray-100 transition-colors">
             <div class="flex items-start space-x-2">
               <div class="w-3 h-3 rounded-full {getEventTypeColor(event.type)} mt-1 flex-shrink-0"></div>
@@ -186,7 +185,7 @@
     </h3>
     {#if eventsByDate[`${selectedDate.year}-${String(selectedDate.month).padStart(2, '0')}-${String(selectedDate.day).padStart(2, '0')}`]}
       <div class="space-y-3">
-        {#each eventsByDate[`${selectedDate.year}-${String(selectedDate.month).padStart(2, '0')}-${String(selectedDate.day).padStart(2, '0')}`] as event}
+        {#each eventsByDate[`${selectedDate.year}-${String(selectedDate.month).padStart(2, '0')}-${String(selectedDate.day).padStart(2, '0')}`] as event (event.id)}
           <div class="rounded-md border bg-white shadow-sm p-3 flex flex-col gap-2">
             <div class="flex items-center justify-between gap-2">
               <div>

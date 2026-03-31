@@ -139,7 +139,7 @@
   <div class="grid grid-cols-8 gap-1 border rounded-lg overflow-hidden">
     <!-- Header Row -->
     <div class="bg-gray-50 p-2 text-sm font-medium border-r">Time</div>
-    {#each weekDates as date}
+    {#each weekDates as date (date.toString())}
       <div class="bg-gray-50 p-2 text-sm font-medium text-center border-r last:border-r-0">
         <div>{formatDate(date)}</div>
         <div class="text-xs text-gray-500">{date.day}</div>
@@ -147,14 +147,14 @@
     {/each}
 
     <!-- Time Slots -->
-    {#each timeSlots as timeSlot}
+    {#each timeSlots as timeSlot (timeSlot.value)}
       <!-- Time Label -->
       <div class="bg-gray-50 p-2 text-sm border-r border-b text-right">
         {timeSlot.label}
       </div>
       
       <!-- Day Columns -->
-      {#each weekDates as date}
+      {#each weekDates as date (date.toString())}
         <div class="relative min-h-[60px] border-r border-b last:border-r-0 hover:bg-gray-50 transition-colors">
           <!-- Time Slot Click Area -->
           <button
@@ -166,7 +166,7 @@
           <!-- Events in this time slot -->
           {#if eventsByDateTime[`${getDateKey(date)}-${timeSlot.hour}`]}
             <div class="p-1 space-y-1">
-              {#each eventsByDateTime[`${getDateKey(date)}-${timeSlot.hour}`] as event}
+              {#each eventsByDateTime[`${getDateKey(date)}-${timeSlot.hour}`] as event (event.id)}
                 <button
                   class="w-full text-left text-xs p-1 rounded {getEventTypeColor(event.type)} text-white hover:opacity-80 transition-opacity"
                   onclick={() => handleEventClick(event)}
@@ -218,7 +218,7 @@
     </h3>
     {#if weekEvents.length > 0}
       <div class="space-y-3">
-        {#each weekEvents as event}
+        {#each weekEvents as event (event.id)}
           <div class="rounded-md border bg-white shadow-sm p-3 flex flex-col gap-2">
             <div class="flex items-center justify-between gap-2">
               <div>

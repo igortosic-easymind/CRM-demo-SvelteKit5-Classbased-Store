@@ -241,7 +241,7 @@
           disabled={mode === "view"}
           class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
         >
-          {#each eventTypes as eventType}
+          {#each eventTypes as eventType (eventType.value)}
             <option value={eventType.value} selected={event?.type === eventType.value}>
               {eventType.label}
             </option>
@@ -258,7 +258,7 @@
           disabled={mode === "view"}
           class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
         >
-          {#each eventStatuses as eventStatus}
+          {#each eventStatuses as eventStatus (eventStatus.value)}
             <option value={eventStatus.value} selected={event?.status === eventStatus.value}>
               {eventStatus.label}
             </option>
