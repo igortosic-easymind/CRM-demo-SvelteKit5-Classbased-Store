@@ -229,7 +229,7 @@
     <div class="space-y-4">
       <h2 class="text-xl font-semibold">Events & Tasks</h2>
       <div class="space-y-3">
-        {#each filteredCalendarItems as item (item.id)}
+        {#each filteredCalendarItems as item (`${item.item_type}-${item.id}`)}
           <CalendarViewItem 
             {item}
           />

@@ -191,7 +191,7 @@
         No items found
       </div>
     {:else}
-      {#each sortedItems as item (item.id)}
+      {#each sortedItems as item (`${item.item_type}-${item.id}`)}
         <CalendarViewItem 
           item={item}
           compact={true}
