@@ -20,7 +20,7 @@
 
   let { item, compact = false }: Props = $props();
 
-  function isCalendarEvent(obj: any): obj is CalendarEvent {
+  function isCalendarEvent(obj: CalendarViewItem | CalendarEvent): obj is CalendarEvent {
     return 'recurrence' in obj && 'all_day' in obj;
   }
 

@@ -4,6 +4,7 @@
   import { Input } from "$lib/components/ui/input/index.js";
   import { Label } from "$lib/components/ui/label/index.js";
   import { enhance } from "$app/forms";
+  import type { ActionResult } from '@sveltejs/kit';
   import { calendarStore } from "$lib/store/calendar.svelte";
   import type { CalendarEventType, CalendarEventStatus } from "$lib/types";
   import { invalidateAll } from "$app/navigation";
@@ -49,7 +50,6 @@
   $effect(() => {
     if (open && mode === "create") {
       // This will trigger when selectedDate or selectedTime change
-      selectedTime;
       initializeFormData();
     }
   });
@@ -60,6 +60,7 @@
       defaultEndDate = formatDateTimeLocal(event.end_date);
     } else {
       // Create mode - initialize with selected date/time
+      // eslint-disable-next-line svelte/prefer-svelte-reactivity
       const now = new Date();
       let startDate: Date;
       
@@ -80,7 +81,7 @@
         // No date specified, use current date and time
         startDate = now;
       }
-      
+      // eslint-disable-next-line svelte/prefer-svelte-reactivity
       const endDate = new Date(startDate);
       endDate.setHours(startDate.getHours() + 1); // Default 1 hour duration
 
@@ -120,7 +121,7 @@
   function handleSubmit() {
     isSubmitting = true;
     
-    return async ({ update, result }: { update: () => Promise<void>; result: any }) => {
+    return async ({ update, result }: { update: () => Promise<void>; result: ActionResult }) => {
       await update();
       isSubmitting = false;
     
@@ -188,7 +189,7 @@
           name="description"
           placeholder="Event description"
           disabled={mode === "view"}
-          class="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+          class="flex min-h-20 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
         >{event?.description || ""}</textarea>
       </div>
 

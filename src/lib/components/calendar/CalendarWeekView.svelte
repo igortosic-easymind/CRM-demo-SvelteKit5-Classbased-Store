@@ -155,7 +155,7 @@
       
       <!-- Day Columns -->
       {#each weekDates as date (date.toString())}
-        <div class="relative min-h-[60px] border-r border-b last:border-r-0 hover:bg-gray-50 transition-colors">
+        <div class="relative min-h-15 border-r border-b last:border-r-0 hover:bg-gray-50 transition-colors">
           <!-- Time Slot Click Area -->
           <button
             class="absolute inset-0 w-full h-full opacity-0 hover:opacity-10 bg-blue-500 transition-opacity"

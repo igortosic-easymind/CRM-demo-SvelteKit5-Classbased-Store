@@ -11,7 +11,6 @@
   interface Props {
     events?: CalendarEvent[];
     selectedDate?: CalendarDate;
-    // onDateSelect?: (detail: { date: CalendarDate; events: CalendarEvent[] }) => void;
   }
 
   let {
@@ -110,7 +109,7 @@
         {#each eventsByDate[`${selectedDate.year}-${String(selectedDate.month).padStart(2, '0')}-${String(selectedDate.day).padStart(2, '0')}`] as event (event.id)}
           <div class="w-full p-2 rounded border hover:bg-gray-100 transition-colors">
             <div class="flex items-start space-x-2">
-              <div class="w-3 h-3 rounded-full {getEventTypeColor(event.type)} mt-1 flex-shrink-0"></div>
+              <div class="w-3 h-3 rounded-full {getEventTypeColor(event.type)} mt-1 shrink-0"></div>
               <div class="flex-1 min-w-0">
                 <div class="flex items-center justify-between">
                   <div class="font-medium truncate">{event.title}</div>
@@ -126,7 +125,7 @@
                 {/if}
               </div>
               <!-- Action Buttons -->
-              <div class="flex items-center space-x-1 flex-shrink-0">
+              <div class="flex items-center space-x-1 shrink-0">
                 <Button
                   size="sm"
                   variant="ghost"

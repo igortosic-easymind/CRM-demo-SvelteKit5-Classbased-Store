@@ -133,7 +133,7 @@
         <div class="w-full p-3 rounded-lg border hover:bg-gray-50 transition-colors">
           <div class="flex items-start space-x-3">
             <!-- Event Type Indicator -->
-            <div class="w-3 h-3 rounded-full {getEventTypeColor(event.type)} mt-1 flex-shrink-0"></div>
+            <div class="w-3 h-3 rounded-full {getEventTypeColor(event.type)} mt-1 shrink-0"></div>
             
             <!-- Event Details -->
             <div class="flex-1 min-w-0">
@@ -162,7 +162,7 @@
             </div>
 
             <!-- Action Buttons -->
-            <div class="flex items-center space-x-1 flex-shrink-0">
+            <div class="flex items-center space-x-1 shrink-0">
               <Button
                 size="sm"
                 variant="ghost"
@@ -205,7 +205,7 @@
   {/if}
 </div>
 
-<style>
+<style lang="postcss">
   .line-clamp-2 {
     display: -webkit-box;
     -webkit-line-clamp: 2;

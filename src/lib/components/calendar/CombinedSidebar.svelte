@@ -90,10 +90,12 @@
         const dayOfWeek = selectedDate.getDay();
         const mondayOffset = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
         
+        // eslint-disable-next-line svelte/prefer-svelte-reactivity
         const weekStart = new Date(selectedDate);
         weekStart.setDate(weekStart.getDate() + mondayOffset);
         weekStart.setHours(0, 0, 0, 0);
         
+        // eslint-disable-next-line svelte/prefer-svelte-reactivity
         const weekEnd = new Date(weekStart);
         weekEnd.setDate(weekStart.getDate() + 6);
         weekEnd.setHours(23, 59, 59, 999);
@@ -199,7 +201,7 @@
   </div>
 </div>
 
-<style>
+<style lang="postcss">
   .combined-sidebar {
     @apply w-full h-full;
   }

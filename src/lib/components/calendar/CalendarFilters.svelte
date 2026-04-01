@@ -319,7 +319,7 @@
   {/if}
 </div>
 
-<style>
+<style lang="postcss">
   .calendar-filters {
     @apply w-full;
   }

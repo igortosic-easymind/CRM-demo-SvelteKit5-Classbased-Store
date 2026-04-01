@@ -74,7 +74,7 @@
         <!-- Event Info -->
         <div class="p-4 bg-gray-50 rounded-lg">
           <div class="flex items-start space-x-3">
-            <div class="w-4 h-4 rounded-full {getEventTypeColor(event.type)} mt-1 flex-shrink-0"></div>
+            <div class="w-4 h-4 rounded-full {getEventTypeColor(event.type)} mt-1 shrink-0"></div>
             <div class="flex-1">
               <h4 class="font-semibold text-lg">{event.title}</h4>
               <p class="text-sm text-gray-600 mt-1">

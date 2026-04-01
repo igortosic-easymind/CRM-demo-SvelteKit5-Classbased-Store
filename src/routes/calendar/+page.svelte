@@ -114,11 +114,11 @@
     goto(url.toString(), { replaceState: true, invalidateAll: true });
   }
 
-  function handleDateSelect(detail: { date: CalendarDate; events: CalendarEvent[] }) {
-    selectedDate = detail.date;
-    calendarStore.setCurrentCalendarDate(formatDateForURL(selectedDate));
-    updateURL(undefined, selectedDate);
-  }
+  // function handleDateSelect(detail: { date: CalendarDate; events: CalendarEvent[] }) {
+  //   selectedDate = detail.date;
+  //   calendarStore.setCurrentCalendarDate(formatDateForURL(selectedDate));
+  //   updateURL(undefined, selectedDate);
+  // }
 
   function handleWeekChange(date: CalendarDate) {
     selectedDate = date;
@@ -250,7 +250,6 @@
           <CalendarMonthView 
             events={filteredEvents}
             bind:selectedDate
-            onDateSelect={handleDateSelect}
           />
         {:else}
           <CalendarWeekView 
