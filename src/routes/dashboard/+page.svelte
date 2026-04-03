@@ -4,7 +4,7 @@
   import UpcomingEvents from '$lib/components/dashboard/upcoming-events.svelte';
   import ClientDistribution from '$lib/components/dashboard/client-distribution.svelte';
   import ClientGrowth from '$lib/components/dashboard/client-growth.svelte';
-  import { Users, UserPlus, Phone, Calendar, CheckSquare } from '@lucide/svelte';
+  import { Users, UserPlus, Phone, Calendar, SquareCheck } from '@lucide/svelte';
   import type { PageProps } from './$types';
 
   let { data }: PageProps = $props();
@@ -52,7 +52,7 @@
       title="Active Tasks" 
       value={data.statistics.activeTasks}
       description="5 due today"
-      icon={CheckSquare}
+      icon={SquareCheck}
     />
   </div>
   

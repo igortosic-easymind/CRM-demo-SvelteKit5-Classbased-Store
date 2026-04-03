@@ -23,7 +23,7 @@
       <div class="text-sm text-gray-600 mb-4">Total clients over the last 6 months</div>
       
       <div class="space-y-2">
-        {#each growthData as data}
+        {#each growthData as data (`growth-${data.month}`)}
           <div class="flex items-center justify-between">
             <span class="text-sm font-medium w-12">{data.month}</span>
             <div class="flex-1 mx-4">

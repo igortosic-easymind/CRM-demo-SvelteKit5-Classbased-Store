@@ -31,9 +31,9 @@
   </Card.Header>
   <Card.Content>
     <div class="space-y-4">
-      {#each events as event}
+      {#each events as event (`event-${event.id}`)}
         <div class="flex items-start space-x-3">
-          <div class="flex-shrink-0">
+          <div class="shrink-0">
             <span class="text-lg">{getEventTypeIcon(event.type)}</span>
           </div>
           <div class="flex-1 min-w-0">
@@ -45,7 +45,7 @@
               <p class="text-xs text-gray-400">📍 {event.location}</p>
             {/if}
           </div>
-          <div class="flex-shrink-0">
+          <div class="shrink-0">
             <span class="inline-flex items-center rounded-full px-2 py-1 text-xs font-medium bg-gray-100 text-gray-800">
               {event.type}
             </span>

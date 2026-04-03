@@ -1,11 +1,12 @@
 <script lang="ts">
   import * as Card from '$lib/components/ui/card/index.js';
+  import type { Component } from 'svelte';
   
   interface Props {
     title: string;
     value: number | string;
     description?: string;
-    icon?: any;
+    icon?: Component;
     trend?: {
       value: number;
       label: string;

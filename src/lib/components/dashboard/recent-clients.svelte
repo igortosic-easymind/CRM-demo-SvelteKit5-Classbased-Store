@@ -40,10 +40,10 @@
   </Card.Header>
   <Card.Content>
     <div class="space-y-4">
-      {#each clients as client}
+      {#each clients as client (`client-${client.id}`)}
         <div class="flex items-center justify-between">
           <div class="flex items-center space-x-3">
-            <div class="flex-shrink-0">
+            <div class="shrink-0">
               <div class="h-8 w-8 rounded-full bg-gray-300 flex items-center justify-center">
                 <span class="text-sm font-medium text-gray-700">
                   {getInitials(client)}
