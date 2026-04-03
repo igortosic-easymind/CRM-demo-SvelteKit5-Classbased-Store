@@ -20,7 +20,12 @@ export default ts.config(
     languageOptions: {
       globals: { ...globals.browser, ...globals.node },
     },
-    rules: { "no-undef": "off", "svelte/no-navigation-without-resolve": "off" },
+    rules: {
+      "no-undef": "off",
+      "svelte/no-navigation-without-resolve": "off",
+      argsIgnorePattern: "^on[A-Z].*",
+      varsIgnorePattern: "^_",
+    },
   },
   {
     files: ["**/*.svelte", "**/*.svelte.ts", "**/*.svelte.js"],

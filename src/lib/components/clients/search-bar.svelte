@@ -57,7 +57,7 @@
 </script>
 
 <div class="flex gap-2">
-  <div class="relative flex-grow">
+  <div class="relative grow">
     <Search class="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
     <Input
       type="text"
