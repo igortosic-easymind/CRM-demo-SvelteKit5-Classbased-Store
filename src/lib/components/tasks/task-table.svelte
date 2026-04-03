@@ -88,7 +88,7 @@
       </tr>
     </thead>
     <tbody>
-      {#each tasks as task}
+      {#each tasks as task (`task-${task.id}`)}
         <tr class="border-b bg-card hover:bg-muted/20">
           <td class="px-4 py-3">
             <div>
@@ -144,7 +144,7 @@
       <div class="text-sm">Loading tasks...</div>
     </div>
   {/if}
-  {#each tasks as task}
+  {#each tasks as task (`task-${task.id}`)}
     <div class="flex flex-col gap-2 rounded-md border bg-card p-4 shadow-sm">
       <div class="flex items-center justify-between gap-2">
         <div>

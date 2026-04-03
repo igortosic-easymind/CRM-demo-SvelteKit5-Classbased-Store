@@ -45,7 +45,7 @@
       size="sm"
       disabled={isLoading}
       onclick={() => handleFilterChange(filter.value)}
-      class="flex-1 min-w-[120px] sm:min-w-0"
+      class="flex-1 min-w-30 sm:min-w-0"
     >
       {#if filter.value !== "all"}
         <span class={`inline-block h-2 w-2 rounded-full mr-1.5 ${

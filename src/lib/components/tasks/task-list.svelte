@@ -70,7 +70,7 @@
   <!-- Pagination -->
   {#if paginationData.totalPages > 1}
     <div class="flex justify-center gap-2 pt-4">
-      {#each Array(paginationData.totalPages) as _, i}
+      {#each Array(paginationData.totalPages) as _, i (`page-${i}`)}
         {@const pageNum = i + 1}
         {@const isCurrent = pageNum === paginationData.currentPage}
         
