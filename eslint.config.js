@@ -23,8 +23,13 @@ export default ts.config(
     rules: {
       "no-undef": "off",
       "svelte/no-navigation-without-resolve": "off",
-      argsIgnorePattern: "^on[A-Z].*",
-      varsIgnorePattern: "^_",
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        {
+          argsIgnorePattern: "^(_|on[A-Z].*)",
+          varsIgnorePattern: "^_",
+        },
+      ],
     },
   },
   {
