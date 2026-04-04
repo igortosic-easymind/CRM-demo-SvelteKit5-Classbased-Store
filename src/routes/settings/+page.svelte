@@ -4,7 +4,6 @@
   import { Input } from "$lib/components/ui/input/index.js";
   import { Label } from "$lib/components/ui/label/index.js";
   import { Switch } from "$lib/components/ui/switch/index.js";
-  import { Select, SelectContent, SelectItem, SelectTrigger } from "$lib/components/ui/select/index.js";
   import { 
     Construction, 
     Bell, 
@@ -143,7 +142,7 @@
             <Label>Session Timeout</Label>
             <p class="text-sm text-muted-foreground">Automatically log out after inactivity</p>
           </div>
-          <select disabled class="w-[180px] px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-100 text-gray-500">
+          <select disabled class="w-45 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-100 text-gray-500">
             <option value="15">15 minutes</option>
             <option value="30">30 minutes</option>
             <option value="60">1 hour</option>
