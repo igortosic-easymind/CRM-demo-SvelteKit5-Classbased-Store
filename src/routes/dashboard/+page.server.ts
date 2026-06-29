@@ -72,11 +72,10 @@ export const load = async ({ cookies }: { cookies: Cookies }) => {
 
   // Client growth data (simplified - just monthly counts for last 6 months)
   const clientGrowthData = [];
+  const today = new Date();
   for (let i = 5; i >= 0; i--) {
-    const monthDate = new Date();
-    monthDate.setMonth(monthDate.getMonth() - i);
-    const monthStart = new Date(monthDate.getFullYear(), monthDate.getMonth(), 1);
-    const monthEnd = new Date(monthDate.getFullYear(), monthDate.getMonth() + 1, 0);
+    const monthStart = new Date(today.getFullYear(), today.getMonth() - i, 1);
+    const monthEnd = new Date(today.getFullYear(), today.getMonth() - i + 1, 0);
 
     const clientsInMonth = clients.filter((client) => {
       const createdAt = new Date(client.created_at);
@@ -84,7 +83,7 @@ export const load = async ({ cookies }: { cookies: Cookies }) => {
     }).length;
 
     clientGrowthData.push({
-      month: monthDate.toLocaleString("default", { month: "short" }),
+      month: monthStart.toLocaleString("default", { month: "short" }),
       clients: clientsInMonth,
     });
   }
